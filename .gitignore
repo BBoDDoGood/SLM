@@ -1,0 +1,63 @@
+# 모델 체크포인트 및 대용량 파일들
+*/checkpoint-*/
+*/*-crowd-monitoring/model.safetensors
+*/*-crowd-monitoring/logs/
+*/*-crowd-monitoring/checkpoint-*/
+*/mlruns/
+
+# 로그 파일들
+*.log
+
+# 모델 파일들 (대용량)
+*.bin
+*.pt
+*.pth
+*.safetensors
+*.ckpt
+*.h5
+
+# TensorBoard 로그들
+logs/
+tensorboard_logs/
+
+# Python 캐시
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# 가상환경
+venv/
+env/
+ENV/
+
+# IDE 설정 파일들
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS 파일들
+.DS_Store
+Thumbs.db
+
+# 일반적인 임시 파일들
+*.tmp
+*.temp
+*.bak
+
+# MLflow 실험 로그들
+mlruns/
+
+# Jupyter Notebook 체크포인트
+.ipynb_checkpoints/
+
+# 특정 대용량 디렉토리들
+flant5/mlruns/
+kobart/mlruns/
+pko-t5/mlruns/
+flant5/*-crowd-monitoring/
+kobart/*-crowd-monitoring/
+pko-t5/*-crowd-monitoring/ 
