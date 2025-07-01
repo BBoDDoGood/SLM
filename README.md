@@ -1,114 +1,153 @@
-# 📊 모델 평가 비교 프로젝트
-
-한국어 Small Language Model (SLM) 성능 비교를 위한 군중 모니터링 도메인 특화 모델 학습 및 평가 프로젝트
+# 🚀 PKO-T5 기반 군중 모니터링 Small Language Model (SLM)
 
 ## 🎯 프로젝트 개요
 
-이 프로젝트는 **군중 모니터링** 도메인에서 한국어 SLM 모델들의 성능을 비교 평가합니다.
+이 프로젝트는 **PKO-T5 (Korean T5)** 모델을 기반으로 군중 모니터링과 안전 관리 업무에 특화된 한국어 SLM을 개발합니다. 
 
-### 📋 평가 대상 모델
-- **FlanT5** (`google/flan-t5-base`)
-- **KoBART** (`gogamza/kobart-base-v2`)
-- **PKO-T5** (`pko-t5-base`)
+실시간 군중 밀집 상황을 분석하고, 안전사고 방지를 위한 구체적인 대응 방안을 제시할 수 있는 AI 모델을 목표로 합니다.
+
+### ✨ 주요 특징
+
+- **🇰🇷 한국어 특화**: PKO-T5 모델 기반 한국어 자연어 처리
+- **👥 군중 모니터링**: 실시간 인원 수, 밀집도, 위험도 분석
+- **🛡️ 안전 관리**: 상황별 맞춤형 안전 조치 및 대응 방안 제시
+- **📊 대용량 데이터**: 50,000개 고품질 한국어 학습 데이터
+- **⚡ GPU 최적화**: 제한된 리소스 환경 (RTX 3050 4GB) 최적화
+- **🎯 실용성**: 실제 현장에서 활용 가능한 구체적 분석 결과
+
+## 🏆 학습 성과
+
+**✅ 성공적인 모델 학습 완료**
+
+- **모델**: PKO-T5-base (paust/pko-t5-base)
+- **학습 데이터**: 50,000개 (도메인별 5,000개 × 10개 도메인)
+- **학습 에포크**: 2.1 에포크 (2,100 스텝)
+- **성능 개선**: 손실값 5.34 → 0.154 (**97% 개선**)
+- **모델 크기**: 1.0GB (safetensors 형식)
 
 ## 📁 프로젝트 구조
 
 ```
-모델 평가 비교/
-├── flant5/                 # FlanT5 모델 관련 코드
-│   ├── train_flant5.py     # 학습 스크립트
-│   ├── test_flant5.py      # 평가 스크립트
-│   └── *.json              # 평가 결과
-├── kobart/                 # KoBART 모델 관련 코드
-│   ├── train_kobart.py     # 학습 스크립트
-│   ├── test_kobart.py      # 평가 스크립트
-│   └── *.json              # 평가 결과
-├── pko-t5/                 # PKO-T5 모델 관련 코드
-│   ├── train_pko_t5.py     # 학습 스크립트
-│   ├── test_pko_t5.py      # 평가 스크립트
-│   └── *.json              # 평가 결과
-├── csv/                    # 학습/평가 데이터셋
-├── SLM_dataset/            # 도메인별 데이터셋
-└── requirement.txt         # 의존성 패키지
+SLM/
+├── 🤖 pko-t5/                    # 핵심 학습/테스트 코드
+│   ├── train_pko_t5_gpu.py       # GPU 최적화 학습 스크립트
+│   ├── train_pko_t5_cpu.py       # CPU 학습 스크립트  
+│   └── test_pko_t5.py            # 모델 테스트 및 평가
+├── 📊 csv/                       # 학습 데이터셋 (50,000개)
+│   ├── domain1_dataset.csv       # 군중 밀집 및 체류 감지 (5,000개)
+│   ├── domain2_dataset.csv       # 도메인2 데이터 (5,000개)
+│   └── ... (domain10까지)
+├── 📝 csv_example/               # 도메인별 예시 데이터
+├── 🎯 slm_output/               # 학습된 모델 저장소
+│   ├── checkpoint-2000/          # 중간 체크포인트
+│   └── checkpoint-2100/          # 최종 모델 (2.1 에포크)
+├── 🛠️ templates/                # 데이터 생성 템플릿
+│   ├── template1.py              # 도메인1 데이터 생성기
+│   └── ... (template10까지)
+├── 📚 SLM_dataset/              # 도메인별 설계 문서
+└── 📋 requirement.txt            # 의존성 패키지
 ```
 
-## 🚀 사용 방법
+## 🚀 빠른 시작
 
-### 1. 환경 설정
+### 1️⃣ 환경 설정
+
 ```bash
+# 저장소 클론
+git clone <repository-url>
+cd SLM
+
+# 가상환경 생성 (권장)
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# 의존성 설치
 pip install -r requirement.txt
 ```
 
-### 2. 모델 학습
+### 2️⃣ 모델 학습
+
 ```bash
-# FlanT5 학습
-cd flant5
-python train_flant5.py
-
-# KoBART 학습
-cd kobart
-python train_kobart.py
-
-# PKO-T5 학습
+# GPU 학습 (권장)
 cd pko-t5
-python train_pko_t5.py
+python train_pko_t5_gpu.py
+
+# CPU 학습 (GPU 미사용시)
+python train_pko_t5_cpu.py
 ```
 
-### 3. 모델 평가
+### 3️⃣ 모델 테스트
+
 ```bash
-# 각 모델 디렉토리에서 평가 실행
-python test_[모델명].py
+# 학습된 모델 테스트
+python test_pko_t5.py
 ```
 
-## 📊 평가 결과
+## 💡 사용 예시
 
-각 모델별 평가 결과는 JSON 형태로 저장되며, 다음 지표들을 포함합니다:
-- **BLEU Score**: 번역 품질 평가
-- **ROUGE Score**: 요약 품질 평가
-- **F1 Score**: 전반적인 성능 지표
-- **Exact Match**: 정확한 일치율
+### 입력 예시
+```
+군중 밀집 및 체류 감지, 15:30 지하철역 출입구에서 감지 인원 85명, 기준 인원 60명
+```
 
-## 🎨 주요 특징
+### 출력 예시  
+```
+15:30 지하철역 출입구에서 기준 인원 60명을 25명 초과한 85명이 밀집되어 있습니다. 
+점심시간 승객 유입으로 혼잡이 증가하고 있어 안전사고 위험이 우려됩니다. 
+즉각적인 인원 분산 조치와 우회 경로 안내가 필요합니다.
+```
 
-- **한국어 특화**: 한국어 처리에 최적화된 모델들 비교
-- **도메인 특화**: 군중 모니터링 도메인에 특화된 학습
-- **자동화된 평가**: 일관된 평가 지표로 객관적 비교
-- **메모리 최적화**: 제한된 리소스에서도 효율적 학습
+## 🗂️ 데이터셋 구성
 
-## 🔧 기술 스택
+| 도메인 | 설명 | 데이터 수 | 주요 시나리오 |
+|--------|------|-----------|---------------|
+| Domain 1 | 군중 밀집 및 체류 감지 | 5,000개 | 지하철역, 쇼핑몰, 공연장 등 |
+| Domain 2-10 | 기타 안전 관리 도메인 | 45,000개 | 줄서기 정렬, 비상 상황 등 |
+| **전체** | **10개 도메인** | **50,000개** | **종합 군중 모니터링** |
 
-- **Python 3.8+**
-- **PyTorch**
-- **Transformers (Hugging Face)**
-- **Pandas**
-- **Scikit-learn**
+## ⚙️ 시스템 요구사항
 
-## 📈 성능 비교
+### 🖥️ 하드웨어
+- **GPU**: NVIDIA RTX 3050 (4GB) 이상 권장
+- **메모리**: 16GB RAM 이상
+- **저장공간**: 10GB 이상 여유 공간
 
-| 모델 | BLEU | ROUGE-L | F1 | 학습 시간 |
-|------|------|---------|----|---------| 
-| FlanT5 | - | - | - | - |
-| KoBART | - | - | - | - |
-| PKO-T5 | - | - | - | - |
+### 🐍 소프트웨어
+- **Python**: 3.8 이상
+- **PyTorch**: 2.5.0 이상
+- **Transformers**: 4.53.0 이상
+- **CUDA**: 11.8 이상 (GPU 사용시)
 
-*평가 진행 중*
+## 🔧 주요 기술 스택
+
+| 카테고리 | 기술 스택 |
+|----------|-----------|
+| **🤖 AI Framework** | PyTorch, Hugging Face Transformers |
+| **📊 Data Processing** | Pandas, NumPy, Datasets |
+| **⚡ Training** | Accelerate, TensorBoard |
+| **🎯 Model** | PKO-T5-base (Korean T5) |
+| **💾 Storage** | SafeTensors, JSON |
+
+## 📈 성능 지표
+
+### 학습 진행 상황
+```
+에포크: 2.1/5.0 (42% 완료)
+스텝: 2,100 스텝
+학습 시간: 약 45분 (RTX 3050 기준)
+최종 손실: 0.154 (초기 5.34에서 97% 개선)
+```
+
+### 모델 파일 크기
+- **model.safetensors**: 1.0GB
+- **config.json**: 2KB  
+- **tokenizer.json**: 2.4MB
+- **전체 모델**: 약 1.0GB
 
 ## 🤝 기여 방법
 
-1. 이 저장소를 Fork
-2. 새로운 기능 브랜치 생성 (`git checkout -b feature/새기능`)
-3. 변경사항 커밋 (`git commit -am '새 기능 추가'`)
-4. 브랜치에 Push (`git push origin feature/새기능`)
-5. Pull Request 생성
-
-## 📄 라이센스
-
-이 프로젝트는 MIT 라이센스 하에 있습니다.
-
-## 📞 문의
-
-프로젝트 관련 문의사항이 있으시면 이슈를 생성해 주세요.
-
----
-
-*군중 모니터링을 위한 한국어 SLM 성능 비교 연구* 🚀 
+1. 이 저장소를 Fork 합니다
+2. 새로운 기능 브랜치를 생성합니다 (`git checkout -b feature/새기능`)
+3. 변경사항을 커밋합니다 (`git commit -am '새 기능 추가'`)
+4. 브랜치에 Push 합니다 (`git push origin feature/새기능`)
+5. Pull Request를 생성합니다
