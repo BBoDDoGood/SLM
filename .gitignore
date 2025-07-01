@@ -54,6 +54,11 @@ mlruns/
 # Jupyter Notebook 체크포인트
 .ipynb_checkpoints/
 
+# CSV 데이터 파일들
+*.csv
+csv/
+csv_example/
+
 # 특정 대용량 디렉토리들
 flant5/mlruns/
 kobart/mlruns/

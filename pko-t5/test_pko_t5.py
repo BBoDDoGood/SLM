@@ -13,7 +13,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-CSV_PATH = "../csv/domain1_example_dataset.csv"
+CSV_PATH = "../csv_example/domain1_example_dataset.csv"
 
 def load_model_safe():
     """안전한 모델 로드"""
