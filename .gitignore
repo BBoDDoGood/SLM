@@ -59,6 +59,9 @@ mlruns/
 csv/
 csv_example/
 
+# Templates 폴더
+templates/
+
 # 특정 대용량 디렉토리들
 flant5/mlruns/
 kobart/mlruns/
