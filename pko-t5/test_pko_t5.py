@@ -16,7 +16,6 @@ logger = logging.getLogger(__name__)
 CSV_PATH = "../csv_example/domain1_example_dataset.csv"
 
 def load_model_safe():
-    """안전한 모델 로드"""
     try:
         device = "cpu"
         logger.info(f"사용 디바이스: {device}")
@@ -33,7 +32,6 @@ def load_model_safe():
         return None, None, None
 
 def generate_text_safe(model, tokenizer, device, input_text):
-    """안전한 텍스트 생성"""
     try:
         input_with_prefix = "분석: " + input_text
         
