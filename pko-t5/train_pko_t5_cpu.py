@@ -41,7 +41,7 @@ CSV_FILES = [
     "/Users/yunseong/Desktop/SLM_Model/csv/domain9_dataset.csv",
     "/Users/yunseong/Desktop/SLM_Model/csv/domain10_dataset.csv",
 ]
-OUTPUT_DIR = "./test1"
+OUTPUT_DIR = "/Volumes/Data/slm_model"
 SEED = 42
 
 # 로깅 설정

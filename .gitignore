@@ -54,9 +54,8 @@ mlruns/
 # Jupyter Notebook 체크포인트
 .ipynb_checkpoints/
 
-# CSV 데이터 파일들
+# CSV 데이터 파일들 (csv 폴더는 포함)
 *.csv
-csv/
 csv_example/
 
 # Templates 폴더

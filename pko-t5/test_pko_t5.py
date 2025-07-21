@@ -13,7 +13,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-CSV_PATH = "../csv_example/domain1_example_dataset.csv"
+CSV_PATH = "/Users/yunseong/Desktop/SLM_Model/csv/domain_example.csv"
 
 def load_model_safe():
     try:
